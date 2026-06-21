@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>portal-web-worldcup · 世界杯导航介绍</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f2f4f8;
+      color: #1e2329;
+      line-height: 1.6;
+      padding: 1.5rem 1rem;
+    }
+    .page-wrap {
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+    /* 顶部导航 */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 1rem 1.6rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      border: 1px solid #e9ecf0;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .top-nav .logo {
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+      color: #30455b;
+    }
+    .top-nav .logo span {
+      color: #5690c1;
+      margin-right: 0.2rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #3a4e64;
+      font-size: 0.95rem;
+      padding: 0.3rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #7aa5d0;
+    }
+    .nav-links a.active {
+      border-bottom-color: #305f85;
+      font-weight: 500;
+    }
+    /* hero 区 */
+    .hero {
+      background: #ffffff;
+      border: 1px solid #e2e7ed;
+      border-radius: 24px;
+      padding: 2.8rem 2.5rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.02);
+      margin-bottom: 2.2rem;
+      transition: box-shadow 0.2s;
+    }
+    .hero:hover {
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+      color: #1c2b3a;
+    }
+    .hero h1 i {
+      font-style: normal;
+      color: #4b7ba8;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 640px;
+      color: #3d4f62;
+    }
+    .hero p a {
+      color: #33668e;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed #aec9e0;
+      transition: border-bottom 0.15s;
+    }
+    .hero p a:hover {
+      border-bottom: 1px solid #33668e;
+    }
+    /* 场景卡片三模块 */
+    .scenes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .scene-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e4e9ef;
+      padding: 1.8rem 1.5rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .scene-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+    .scene-card h3 {
+      font-size: 1.2rem;
+      font-weight: 550;
+      margin-bottom: 0.8rem;
+      color: #1f3346;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .scene-card h3 i {
+      font-style: normal;
+      background: #ecf2f9;
+      width: 1.8rem;
+      height: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 30%;
+      font-size: 1rem;
+      color: #30638b;
+    }
+    .scene-card p {
+      color: #40566c;
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+    }
+    .scene-card .small-note {
+      font-size: 0.85rem;
+      color: #6b7f94;
+      border-top: 1px solid #edf2f7;
+      padding-top: 0.7rem;
+      margin-top: 0.5rem;
+    }
+    .scene-card .tag {
+      display: inline-block;
+      background: #eef3f9;
+      border-radius: 40px;
+      padding: 0.2rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #2e5e83;
+      margin-right: 0.4rem;
+    }
+    /* 常见说明 / FAQ 摘要 */
+    .faq-summary {
+      background: #ffffff;
+      border: 1px solid #e5eaf0;
+      border-radius: 24px;
+      padding: 2rem 2.2rem;
+      margin: 2rem 0 2.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .faq-summary h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: #1d3041;
+      letter-spacing: -0.2px;
+    }
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #edf1f6;
+    }
+    .faq-item:last-child {
+      border-bottom: 0;
+    }
+    .faq-item .q {
+      font-weight: 500;
+      color: #1b2c3d;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .faq-item .q::before {
+      content: "•";
+      color: #608ab0;
+      font-weight: 700;
+    }
+    .faq-item .a {
+      color: #3b5269;
+      font-size: 0.93rem;
+      margin: 0.3rem 0 0 1.4rem;
+    }
+    .faq-item .a a {
+      color: #346185;
+      text-decoration: none;
+      border-bottom: 1px dotted #b6cde0;
+    }
+    .faq-item .a a:hover {
+      border-bottom: 1px solid #346185;
+    }
+    /* 底部 */
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      color: #6b7f93;
+      font-size: 0.85rem;
+      border-top: 1px solid #e0e6ed;
+      padding-top: 1.5rem;
+    }
+    .footer-note a {
+      color: #3b6e99;
+      text-decoration: none;
+      border-bottom: 1px dotted #b8cee2;
+    }
+    .footer-note a:hover {
+      border-bottom: 1px solid #3b6e99;
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 2rem 1.2rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .top-nav { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: center; gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+  <!-- 顶部导航 -->
+  <nav class="top-nav">
+    <div class="logo"><span>◉</span>portal‑worldcup</div>
+    <div class="nav-links">
+      <a href="#" class="active">介绍</a>
+      <a href="#">场景</a>
+      <a href="#">指引</a>
+    </div>
+  </nav>
+
+  <!-- 核心介绍 hero -->
+  <section class="hero">
+    <h1>走近 <i>世界杯</i> · 轻量导航</h1>
+    <p>
+      这是一个围绕 <a href="https://portal-web-worldcup.com">世界杯</a> 整理的信息入口站点。
+      主要面向希望快速理清用途、了解相关场景的访客，不堆砌资讯，只呈现精简的内容框架。
+      你可以把它看作一道门，门后是更集中的领域信息。
+    </p>
+  </section>
+
+  <!-- 三个场景模块 -->
+  <div class="scenes">
+    <div class="scene-card">
+      <h3><i>📋</i> 信息查阅</h3>
+      <p>作为基础索引页，提供与赛事、队伍、背景相关的说明。适合初步浏览，不深入数据细节。</p>
+      <div class="small-note"><span class="tag">轻量</span> 目标明确，内容克制</div>
+    </div>
+    <div class="scene-card">
+      <h3><i>🧭</i> 导航跳转</h3>
+      <p>通过内部链接及引用，帮助用户找到更聚焦的板块。例如从 <a href="https://portal-web-worldcup.com">世界杯</a> 页面进入更垂直的栏目。</p>
+      <div class="small-note"><span class="tag">路径</span> 一层即可抵达</div>
+    </div>
+    <div class="scene-card">
+      <h3><i>📌</i> 常见说明</h3>
+      <p>网站定位是辅助理解型入口，不代替官方渠道。用户可快速确认自己是否在正确的地方。</p>
+      <div class="small-note"><span class="tag">边界</span> 清晰，不误导</div>
+    </div>
+  </div>
+
+  <!-- 常见说明 / FAQ 摘要 -->
+  <div class="faq-summary">
+    <h2>常见说明</h2>
+    <div class="faq-item">
+      <div class="q">这个网站的主要用途是什么？</div>
+      <div class="a">本页是 <a href="https://portal-web-worldcup.com">世界杯</a> 相关的一个轻量导航介绍页，帮助到访者快速判断内容方向，并提供结构化的场景参考。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">与直接搜索世界杯有什么不同？</div>
+      <div class="a">这里更侧重整理和引导，适合想先了解网站架构、再决定是否深入阅读的用户，避免信息过载。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">链接会跳转到哪里？</div>
+      <div class="a">文中出现的“世界杯”一词指向 <a href="https://portal-web-worldcup.com">世界杯</a>，即本站域名。</div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    基于轻量导航设计 · 内容仅供参考 · 更多内容请直接访问 <a href="https://portal-web-worldcup.com">世界杯</a>
+  </div>
+</div>
+</body>
+</html>
